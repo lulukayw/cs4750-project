@@ -1,0 +1,12 @@
+# Files NOT uploaded on `gcloud app deploy`
+.git
+.gitignore
+.gcloudignore
+.env
+.env.example
+app.yaml.example
+node_modules/
+client/node_modules/
+client/dist/
+sql/
+*.log

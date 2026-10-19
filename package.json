@@ -1,0 +1,16 @@
+{
+  "name": "cs4750-project",
+  "private": true,
+  "scripts": {
+    "start": "node server/index.js",
+    "dev:server": "node --env-file=.env server/index.js",
+    "gcp-build": "npm --prefix client install --include=dev && npm --prefix client run build"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "express": "^4.22.3",
+    "mysql2": "^3.24.6"
+  }
+}
