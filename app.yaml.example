@@ -1,9 +1,0 @@
-# Copy to app.yaml (gitignored) and fill in DB_PASS before deploying.
-runtime: nodejs22
-
-env_variables:
-  DB_USER: app_user
-  DB_PASS: REPLACE_ME
-  DB_NAME: todo-app
-  # App Engine mounts Cloud SQL at /cloudsql/<connection name>
-  DB_SOCKET: /cloudsql/cs4750-project-512018:us-east4:db

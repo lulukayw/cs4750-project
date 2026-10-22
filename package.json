@@ -1,15 +1,16 @@
 {
   "name": "cs4750-project",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "node server/index.js",
-    "dev:server": "node --env-file=.env server/index.js",
-    "gcp-build": "npm --prefix client install --include=dev && npm --prefix client run build"
+    "dev:server": "node --env-file=.env server/index.js"
   },
   "engines": {
     "node": "22.x"
   },
   "dependencies": {
+    "@google-cloud/cloud-sql-connector": "^1.12.1",
     "express": "^4.22.3",
     "mysql2": "^3.24.6"
   }
