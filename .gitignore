@@ -23,6 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-# Secrets: never commit these
+# Secrets: never commit this
 .env
-app.yaml

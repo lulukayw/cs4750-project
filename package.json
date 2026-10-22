@@ -4,8 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "node server/index.js",
-    "dev:server": "node --env-file=.env server/index.js",
-    "gcp-build": "npm --prefix client install --include=dev && npm --prefix client run build"
+    "dev:server": "node --env-file=.env server/index.js"
   },
   "engines": {
     "node": "22.x"
