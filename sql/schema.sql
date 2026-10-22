@@ -38,7 +38,7 @@ CREATE TABLE Task (
 CREATE TABLE Cycle (
   cycle_id         INT AUTO_INCREMENT PRIMARY KEY,
   frequency        VARCHAR(20) NOT NULL,         -- 'daily', 'weekly', 'monthly', etc. maybe we make an enum for this?
-  current_position INT NOT NULL DEFAULT 0       -- whose turn it is (matches User_Cycle.user_position)
+  current_position INT NOT NULL DEFAULT 0        -- whose turn it is (matches User_Cycle.user_position)
 ); 
 
 CREATE TABLE Label (
