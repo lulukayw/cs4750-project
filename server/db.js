@@ -1,20 +1,27 @@
-const mysql = require('mysql2/promise');
+import mysql from 'mysql2/promise';
+import { Connector } from '@google-cloud/cloud-sql-connector';
 
-const config = {
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 5,
+const connector = new Connector();
+
+const getPoolConfig = async () => {
+  if (process.env.INSTANCE_CONNECTION_NAME) {
+    const clientOpts = await connector.getOptions({
+      instanceConnectionName: process.env.INSTANCE_CONNECTION_NAME,
+      ipType: process.env.DB_IP_TYPE || 'PUBLIC',
+    });
+
+    return {
+      ...clientOpts,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
+      waitForConnections: true,
+      connectionLimit: 5,
+    };
+  }
 };
 
-if (process.env.DB_SOCKET) {
-  // App Engine -> Cloud SQL (same idea as the PDO unix_socket DSN)
-  config.socketPath = process.env.DB_SOCKET;
-} else {
-  // Local dev
-  config.host = process.env.DB_HOST || '127.0.0.1';
-  config.port = Number(process.env.DB_PORT || 3306);
-}
+const poolConfig = await getPoolConfig();
+const pool = mysql.createPool(poolConfig);
 
-module.exports = mysql.createPool(config);
+export default pool;

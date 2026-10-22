@@ -1,6 +1,7 @@
-const express = require('express');
-const path = require('path');
-const pool = require('./db');
+import express from 'express';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import pool from './db.js';
 
 const app = express();
 app.use(express.json());
@@ -46,6 +47,7 @@ app.post('/api/entries', async (req, res) => {
 });
 
 // Serve the built React app (replaces the PHP front controller)
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const dist = path.join(__dirname, '..', 'client', 'dist');
 app.use(express.static(dist));
 app.use((req, res) => res.sendFile(path.join(dist, 'index.html')));
