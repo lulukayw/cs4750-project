@@ -38,7 +38,8 @@ CREATE TABLE Task (
 CREATE TABLE Cycle (
   cycle_id         INT AUTO_INCREMENT PRIMARY KEY,
   frequency        VARCHAR(20) NOT NULL,         -- 'daily', 'weekly', 'monthly', etc. maybe we make an enum for this?
-  current_position INT NOT NULL DEFAULT 0        -- whose turn it is (matches User_Cycle.user_position)
+  current_position INT NOT NULL DEFAULT 0,       -- whose turn it is (matches User_Cycle.user_position)
+  CHECK (current_position >= 0)
 ); 
 
 CREATE TABLE Label (
@@ -87,7 +88,8 @@ CREATE TABLE User_Cycle (
   PRIMARY KEY (user_id, cycle_id),
   UNIQUE (cycle_id, user_position),              -- two users can't share a slot in a rotation
   FOREIGN KEY (user_id)  REFERENCES `User`(user_id) ON DELETE CASCADE,
-  FOREIGN KEY (cycle_id) REFERENCES Cycle(cycle_id) ON DELETE CASCADE
+  FOREIGN KEY (cycle_id) REFERENCES Cycle(cycle_id) ON DELETE CASCADE,
+  CHECK (user_position >= 0)
 ); 
 
 CREATE TABLE Task_Cycle (
@@ -111,4 +113,4 @@ CREATE TABLE User_Phone (
   phone_number VARCHAR(20) NOT NULL,
   PRIMARY KEY (user_id, phone_number),
   FOREIGN KEY (user_id) REFERENCES `User`(user_id) ON DELETE CASCADE
-); 
+) 
